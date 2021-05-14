@@ -16,6 +16,11 @@ resource "aws_vpc" "production-vpc" {
 }
 
 resource "aws_subnet" "" {
-  cidr_block = ""
-  vpc_id     = "${var.vpc.production-vpc.id}"
+  cidr_block        = "${var.public_subnet_1_cidr}"
+  vpc_id            = "${aws_vpc.production-vpc.id}"
+  availability_zone = "eu-west-1a"
+  
+  tags {
+    Name = "Public-Subnet-1"
+  }
 }
