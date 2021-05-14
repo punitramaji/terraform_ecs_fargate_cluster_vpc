@@ -11,7 +11,7 @@ resource "aws_vpc" "production-vpc" {
   enable_dns_hostnames = true
   
   tags {
-    name = "Production-vpc"
+    Name = "Production-VPC"
   }
 }
 
