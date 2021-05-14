@@ -31,6 +31,6 @@ resource "aws_subnet" "public-subnet-2" {
   availability_zone = "eu-west-1b"
   
   tags {
-    Name = "Public-Subnet-1"
+    Name = "Public-Subnet-2"
   }
 }
