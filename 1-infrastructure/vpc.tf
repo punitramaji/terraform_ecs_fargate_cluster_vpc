@@ -34,3 +34,13 @@ resource "aws_subnet" "public-subnet-2" {
     Name = "Public-Subnet-2"
   }
 }
+
+resource "aws_subnet" "public-subnet-3" {
+  cidr_block        = "${var.public_subnet_3_cidr}"
+  vpc_id            = "${aws_vpc.production-vpc.id}"
+  availability_zone = "eu-west-1c"
+  
+  tags {
+    Name = "Public-Subnet-3"
+  }
+}
