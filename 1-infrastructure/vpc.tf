@@ -14,3 +14,8 @@ resource "aws_vpc" "production-vpc" {
     name = "Production-vpc"
   }
 }
+
+resource "aws_subnet" "" {
+  cidr_block = ""
+  vpc_id     = "${var.vpc.production-vpc.id}"
+}
