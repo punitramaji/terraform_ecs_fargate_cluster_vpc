@@ -7,5 +7,10 @@ terraform {
 }
 
 resource "aws_vpc" "production-vpc" {
-  cidr_block = ""
+  cidr_block          = "${var.vpc_cidr}"
+  enable_dns_hostname = true
+  
+  tags {
+    name = "Production-vpc"
+  }
 }
