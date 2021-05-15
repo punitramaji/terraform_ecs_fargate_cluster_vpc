@@ -55,7 +55,7 @@ resource "aws_alb_listner" "ecs_alb_https_listner" {
   ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
   certificate_arn   = "${aws_acm_certificate.ecs_domain_certifiacte.arn}" #this binds https listner with an actual certificate from aws
   
-  "default_action" {
+  default_action {
     type = "forward"
     target_group_arn = "${aws_alb_target_group.ecs_default_target_group.arn}"
   }
