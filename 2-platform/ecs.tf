@@ -19,6 +19,18 @@ data "terraform_remote_state" "infrastructure" {
   }
 }
 
+#Inorder to use ALB with subdomain and different targets group we are gonna create a default target group which ecs understands and actual lb can route the trrafic to our subdomains and services we registered down with target groups, This target group not going to do anything, its basically required by aws for any application lb going to create 
+resource "aws_alb_target_group" "ecs_default_target_group" {
+  name     = "${var.ecs_cluster_name}-TG"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = "${data.terraform_remote_state.infrastructure.vpc_id}"
+  
+  tags = {
+    Name = "${var.ecs_cluster_name}-TG"
+  }
+}
+
 #Create ECS cluster and ALB
 resource "aws_ecs_cluster" "production-fargate-cluster" {
   name = "Production-Fargate-Cluster"
