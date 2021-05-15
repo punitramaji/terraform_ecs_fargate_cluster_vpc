@@ -167,3 +167,8 @@ resource "aws_alb_listner_rule" "ecs_alb_listner_rule" {
     values = ["${lower(var.ecs_service_name)}.${data.terraform_remote_state.platform.ecs_domain_name}"]
   }
 }
+
+#54 Creating CloudWatch Log Group for ECS Service
+resource "aws_cloudwatch_log_group" "apringbootapp_log_group" {
+  name = "${var.ecs_service_name}-LogGroup"
+}
