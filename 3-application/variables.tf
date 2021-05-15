@@ -5,3 +5,4 @@ variable "region" {
 variable "remote_state_key" {}
 variable "remote_state_bucket" {}
 variable "ecs_service_name" {}
+variable "memory" {}
