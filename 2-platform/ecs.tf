@@ -24,4 +24,5 @@ resource "aws_alb" "ecs_cluster_elb" {
   name           = "${var.ecs_cluster_name}-ALB"
   internal       = false
   security_group = ["${aws_security_group.ecs_alb_security_group.id}"]
+  subnets        = ["${split(",", join(",", data.terraform_remote_state.infrastructure.public_subnets))}"]
 }
