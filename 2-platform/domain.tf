@@ -27,3 +27,22 @@ resource "aws_acm_certificate_validation" "ecs_domain_certificate_validation" {
   certificate_arn = "${aws_acm_certificate.ecs_domain_certificate.arn}"
   validation_record_fqdns = ["${aws_route53_record.ecs_cert_validation_record.fqdn}"]
 }
+
+#Create a IAM role, this will help us to access other aws services, s3 bucket, autoscale our cluster or anyother thing
+resource "aws_iam_role" "ecs_cluster_role" {
+  name = "${var.ecs_cluster_name}-IAM-Role"
+  assume_role_policy = <<EOF
+{
+"Version": "2012-10-17",
+"Statement": [
+  {
+    "Effect": "Allow",
+    "Principal": {
+      "Service": ["ecs.amazon.com", "ec2.amazonaws.com", "application-autoscaling.amazonaws.com"]
+     },
+     "Action": "sts:AssumeRole"
+  }
+  ]
+}
+EOF
+}
