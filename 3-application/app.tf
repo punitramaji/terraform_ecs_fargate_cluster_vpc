@@ -152,3 +152,18 @@ resource "aws_ecs_service" "ecs_service" {
     target_group_arn = "${aws_alb_target_group.ecs_app_target_group.arn}"
   }
 }
+
+#53 Creating ALB Listener Rule for ECS Service
+resource "aws_alb_listner_rule" "ecs_alb_listner_rule" {
+  listner_arn = "${data.terraform_remote_state.platform.ecs_alb_listner_arn}"
+  
+  "action" {
+    type             = "farward"
+    target_group_arn = "${aws_alb_target_group.ecs_app_target_group.arn}"
+  }
+  
+  "condition" {
+    field  = "host-header"
+    values = ["${lower(var.ecs_service_name)}.${data.terraform_remote_state.platform.ecs_domain_name}"]
+  }
+}
