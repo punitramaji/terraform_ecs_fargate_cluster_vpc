@@ -40,3 +40,20 @@ resource "aws_ecs_task_defination" "springbootapp-task-defination" {
   execution_role_arn       = ""
   task_role_arn            = ""
 }
+
+#49 Creating IAM Task and Execution Role and Policy for ECS Tasks
+resource "aws_iam_role" "fargate_iam_role" {
+  name               = "${var.ecs_service_name}-IAM-Role"
+  assume_role_policy = <<EOF
+{
+	"Version": "2012-10-17",
+	"Statement": [{
+		"Effect": "Allow",
+		"Principal": {
+			"Service": ["ecs.amazonaws.com", "ecs-tasks.amazonaws.com"]
+		},
+		"Action": "sts:AssumeRole"
+	}]
+}
+EOF
+}
