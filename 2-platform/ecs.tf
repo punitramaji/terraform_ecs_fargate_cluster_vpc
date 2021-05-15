@@ -47,6 +47,19 @@ resource "aws_alb" "ecs_cluster_elb" {
   }
 }
 
+#To be able to use our application loadbalancer we are going to first create https listner for our purposes, we already created certificate and binded with domain, next thing would be to have that functainlity with our loadbalancer bind them together and bind everything our loadbalancer serve the traffic through https namely port 443, lets create a listner for our loadbalancer
+resource "aws_alb_listner" "ecs_alb_https_listner" {
+  load_balancer_arn = "${aws_alb.ecs_cluster_alb.arn}"
+  port              = 443
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
+  certificate_arn   = "${aws_acm_certificate.ecs_domain_certifiacte.arn}" #this binds https listner with an actual certificate from aws
+  
+  "default_action" {
+    type = "forward"
+    target_group_arn = "${aws_alb_target_group.ecs_default_target_group.arn}"
+  }
+}
 
 #Create route 53 record for load balancer
 resource "aws_route53_record" {
@@ -60,3 +73,4 @@ resource "aws_route53_record" {
     zone_id                = "${aws_alb.ecs_cluster_alb.zone_id}"
   }
 }
+
