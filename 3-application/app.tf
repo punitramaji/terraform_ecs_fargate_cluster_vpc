@@ -108,3 +108,22 @@ resource "aws_security_group" "app_security_group" {
     Name = "${var.ecs_service_name}-SG"
   }
 }
+
+#51 Creating ALB Target Group for ECS Service
+resource "aws_alb_target_group" "ecs_app_target_group" {
+  name        = "${var.ecs_service_name}-TG"
+  port        = "${var.docker_container_port}"
+  protocol    = "HTTP"
+  vpc_id      = "${data.terraform_remote_state.platform.vpc_id}"
+  target_type = "ip"
+  
+  health_check {
+    path                = "/actuator/health"
+    protocol            = "HTTP"
+    matcher             = "200"
+    interval            = 60
+    timeout             = 30
+    unhealthy_threshold = "3"
+    healthy_threshold   = "3"
+  }
+}
