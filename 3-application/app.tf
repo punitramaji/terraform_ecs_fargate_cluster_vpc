@@ -126,4 +126,8 @@ resource "aws_alb_target_group" "ecs_app_target_group" {
     unhealthy_threshold = "3"
     healthy_threshold   = "3"
   }
+  
+  tags = {
+    Name = "${var.ecs_service_name}-TG"
+  }
 }
