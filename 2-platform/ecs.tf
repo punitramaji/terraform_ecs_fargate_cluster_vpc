@@ -76,3 +76,52 @@ resource "aws_route53_record" {
   }
 }
 
+#Create a IAM role, this will help us to access other aws services, s3 bucket, autoscale our cluster or anyother thing
+resource "aws_iam_role" "ecs_cluster_role" {
+  name = "${var.ecs_cluster_name}-IAM-Role"
+  assume_role_policy = <<EOF
+{
+"Version": "2012-10-17",
+"Statement": [
+  {
+    "Effect": "Allow",
+    "Principal": {
+      "Service": ["ecs.amazon.com", "ec2.amazonaws.com", "application-autoscaling.amazonaws.com"]
+     },
+     "Action": "sts:AssumeRole"
+  }
+  ]
+}
+EOF
+}
+
+#Create I am policy and attach it with IAM role
+resource "aws_iam_role_policy" "ecs_cluster_policy" {
+  name   = "${var.ecs_cluster_name}-IAM-Policy"
+  role   = "${aws_iam_role.ecs_cluster_role.id}"
+  policy = <<EOF
+{
+  "Version": "2012-10-17"
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecs:*",
+        "ec2:*",
+        "elasticloadbalancing:*",
+        "ecr:*",
+        "dynamodb:*",
+        "cloudwatch:*",
+        "s3:*",
+        "rds:*",
+        "sqs:*",
+        "sns:*",
+        "logs:*",
+        "ssm:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
