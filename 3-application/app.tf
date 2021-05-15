@@ -37,8 +37,8 @@ resource "aws_ecs_task_defination" "springbootapp-task-defination" {
   memory                   = "${var.memory}"
   requires_compatibilities = ["FARGATE"]
   networking_mode          = "awsvpc"
-  execution_role_arn       = ""
-  task_role_arn            = ""
+  execution_role_arn       = "${aws_iam_role.fargate_iam_role.arn}"
+  task_role_arn            = "${aws_iam_role.fargate_iam_role.arn}"
 }
 
 #49 Creating IAM Task and Execution Role and Policy for ECS Tasks
