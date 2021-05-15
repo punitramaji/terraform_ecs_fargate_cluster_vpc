@@ -20,9 +20,10 @@ date "template_file" "ecs_task_defination_template" {
   template = "${file(task_defination.json)}"
   
   vars {
-    task_defination_name = "${var.ecs_service_name}"
-    ecs_service_name     = "${var.ecs_service_name}"
-    docker_image_url     = "${var.docker_image_url}"
-    memory               = "${var.memory}"
+    task_defination_name  = "${var.ecs_service_name}"
+    ecs_service_name      = "${var.ecs_service_name}"
+    docker_image_url      = "${var.docker_image_url}"
+    memory                = "${var.memory}"
+    docker_container_port = "${var.docker_container_port}"
   }
 }
