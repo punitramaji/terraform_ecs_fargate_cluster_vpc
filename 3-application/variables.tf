@@ -8,3 +8,4 @@ variable "ecs_service_name" {}
 variable "memory" {}
 variable "docker_container_port" {}
 variable "spring_profile" {}
+variable "desired_task_number" {}
