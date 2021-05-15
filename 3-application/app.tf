@@ -139,4 +139,10 @@ resource "aws_ecs_service" "ecs_service" {
   desired_count   = "${var.desired_task_number}"
   cluster         = "${data.terraform_remote_state.platform.ecs_cluster_name}"
   launch_type     = "FARGATE"
+  
+  network_configuration {
+    subnets          = ["${data.terraform_remote_state.platform.ecs_public_subnets}"]
+    security_groups  = ["${aws_security_group.app_security_group.id}"]
+    assign_public_ip = true
+  }
 }
