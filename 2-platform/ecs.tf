@@ -64,7 +64,7 @@ resource "aws_alb_listner" "ecs_alb_https_listner" {
 }
 
 #Create route 53 record for load balancer
-resource "aws_route53_record" {
+resource "aws_route53_record" "ecs_loadbalancer_record"{
   name    = "*.${var.ecs_domain_name}"
   type    = "A"
   zone_id = "${data.aws_route53_zone.ecs_domain.zone_id}"
