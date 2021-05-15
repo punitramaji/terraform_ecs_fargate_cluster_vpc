@@ -1,6 +1,5 @@
-
 variable "region" {
-  default = ""eu-west-1"
+  default = "eu-west-1"
 }
 
 variable "remote_state_bucket" {}
