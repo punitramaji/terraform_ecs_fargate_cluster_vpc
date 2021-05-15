@@ -1,11 +1,14 @@
+#Create a provider
 provider "aws" {
   region = "${var.region}"
 }
 
+#Create backend s3
 terraform {
   backend "s3" {}
 }
 
+#Create a remote state to read s3 configurations
 data "terraform_remote_state" "infrastructure" {
   backend = "s3"
   
@@ -16,6 +19,7 @@ data "terraform_remote_state" "infrastructure" {
   }
 }
 
+#Create ECS cluster and ALB
 resource "aws_ecs_cluster" "production-fargate-cluster" {
   name = "Production-Fargate-Cluster"
 }
