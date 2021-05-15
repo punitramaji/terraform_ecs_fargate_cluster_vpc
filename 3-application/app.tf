@@ -145,4 +145,10 @@ resource "aws_ecs_service" "ecs_service" {
     security_groups  = ["${aws_security_group.app_security_group.id}"]
     assign_public_ip = true
   }
+  
+  load_balancer {
+    container_name   = "${var.ecs_service_name}"
+    container_port   = "${var.docker_container_port}"
+    target_group_arn = "${aws_alb_target_group.ecs_app_target_group.arn}"
+  }
 }
