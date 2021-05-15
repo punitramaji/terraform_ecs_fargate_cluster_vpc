@@ -4,3 +4,5 @@ variable "region" {
 
 variable "remote_state_bucket" {}
 variable "remote_state_key" {}
+
+variable "ecs_cluster_name" {}
