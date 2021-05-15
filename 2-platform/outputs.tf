@@ -30,6 +30,6 @@ output "ecs_public_subnets" {
   value = "${data.terraform_remote_state.infrastructure.public_subnets}"
 }
 
-output "ecs_pricate_subnets" {
+output "ecs_private_subnets" {
   value = "${data.terraform_remote_state.infrastructure.private_subnets}"
 }
