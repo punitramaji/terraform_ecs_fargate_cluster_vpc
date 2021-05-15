@@ -15,3 +15,11 @@ data "terraform_remote_state" "platform" {
     region = "${var.region}"
   }
 }
+
+date "template_file" "ecs_task_defination_template" {
+  template = "${file(task_defination.json)}"
+  
+  vars {
+    task_defination_name = "${var.ecs_service_name}"
+  }
+}
