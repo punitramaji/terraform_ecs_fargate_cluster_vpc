@@ -59,6 +59,8 @@ resource "aws_alb_listner" "ecs_alb_https_listner" {
     type = "forward"
     target_group_arn = "${aws_alb_target_group.ecs_default_target_group.arn}"
   }
+  
+  depends_on = ["aws_alb_target_group.ecs_default_target_group"]
 }
 
 #Create route 53 record for load balancer
