@@ -131,3 +131,10 @@ resource "aws_alb_target_group" "ecs_app_target_group" {
     Name = "${var.ecs_service_name}-TG"
   }
 }
+
+#52 Creating ECS Service
+resource "aws_ecs_service" "ecs_service" {
+  name = "${var.ecs_service_name}"
+  task_defination = "${var.ecs_service_name}"
+  desired_count = "${var.desired_task_number}"
+}
