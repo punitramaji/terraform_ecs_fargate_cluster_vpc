@@ -21,5 +21,5 @@ resource "aws_ecs_cluster" "production-fargate-cluster" {
 }
 
 resource "aws_alb" "ecs_cluster_elb" {
-  name = ""
+  name = "${var.ecs_cluster_name}-ALB"
 }
