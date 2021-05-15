@@ -21,5 +21,8 @@ date "template_file" "ecs_task_defination_template" {
   
   vars {
     task_defination_name = "${var.ecs_service_name}"
+    ecs_service_name     = "${var.ecs_service_name}"
+    docker_image_url     = "${var.docker_image_url}"
+    memory               = "${var.memory}"
   }
 }
