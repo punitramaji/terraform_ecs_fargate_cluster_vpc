@@ -8,3 +8,9 @@ resource "aws_acm_certificate" "ecs_domain_certificate" {
     Name = "${var.ecs_cluster_name}-Certificate"
   }
 }
+
+data "aws_route53_zone" "ecs_domain" {
+  name         = "${var.ecs_domain_name}"
+  private_zone = false
+}
+
