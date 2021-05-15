@@ -17,5 +17,9 @@ data "terraform_remote_state" "infrastructure" {
 }
 
 resource "aws_ecs_cluster" "production-fargate-cluster" {
-  name = "Production-Fargate-Cluster""
+  name = "Production-Fargate-Cluster"
+}
+
+resource "aws_alb" "ecs_cluster_elb" {
+  name = ""
 }
