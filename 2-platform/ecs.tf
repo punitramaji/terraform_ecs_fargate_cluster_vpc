@@ -101,7 +101,7 @@ resource "aws_iam_role_policy" "ecs_cluster_policy" {
   role   = "${aws_iam_role.ecs_cluster_role.id}"
   policy = <<EOF
 {
-  "Version": "2012-10-17"
+  "Version": "2012-10-17",
   "Statement": [
     {
       "Effect": "Allow",
